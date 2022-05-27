@@ -4,14 +4,14 @@ Collect of useful commands for OpenSSL creating certificates, should be invoked 
 # Requirements
 `shell`
 ```
-$ brew install openssl
+brew install openssl
 ```
 # Usage
 
 The recommended way to use OpenSSL CLI api is to use `python3`:
 
 ```
-$ python3 start_main_api.py -a 4096
+python3 start_main_api.py -a 4096
 ```
  
 ## Collect of useful command for OpenSSL create certificate:
