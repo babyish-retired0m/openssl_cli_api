@@ -1,0 +1,78 @@
+{
+    "configuration": {
+        "directory_parent": "/Users/jozbox/python/openssl_cli_api/results/",
+        "directory": "2022-05-27_16-43-19_bit_2048_days_256",
+        "path": "/Users/jozbox/python/openssl_cli_api/results/example.lan/2022-05-27_16-43-19_bit_2048_days_256/",
+        "domain": "example.lan",
+        "bit": 2048,
+        "days": 256,
+        "algorithm": "sha256",
+        "Unix_Epoch_Time": 1653669799.229285,
+        "date": "2022-05-27",
+        "time": "16:43:19"
+    },
+    "ca": {
+        "private_key": {
+            "password": "102b1009107E09cUlDny.ElphX3Rbzn.M74EI2iGTNpbCFQIl.MDdo3dw7YYTtO",
+            "path": "/Users/jozbox/python/openssl_cli_api/results/example.lan/2022-05-27_16-43-19_bit_2048_days_256/example.lan_CA.key",
+            "bit": "2048",
+            "name": "example.lan_CA.key"
+        },
+        "certificate": {
+            "algorithm": "sha256",
+            "days": "256",
+            "path": "/Users/jozbox/python/openssl_cli_api/results/example.lan/2022-05-27_16-43-19_bit_2048_days_256/example.lan_CA.pem",
+            "name": "example.lan_CA.pem"
+        },
+        "configuration": {
+            "CN": "example.lan",
+            "subjectAltName": "DNS.1=example.lan",
+            "authorityKeyIdentifier": "keyid,issuer",
+            "basicConstraints": "CA:FALSE",
+            "keyUsage": "digitalSignature,nonRepudiation,keyEncipherment,dataEncipherment",
+            "C": "US",
+            "ST": "VA",
+            "L": "Truro",
+            "O": "Digital_Signature_Inc",
+            "OU": "Mergebot",
+            "emailAddress": "noreply@mergebot.com"
+        }
+    },
+    "key": {
+        "private_key": {
+            "password": "42b4074lXEjfdX36dyqjB9ieyQ12H.W0Zc12c1iP6hjzu5UpgD1pxrhSfs2i8S",
+            "path": "/Users/jozbox/python/openssl_cli_api/results/example.lan/2022-05-27_16-43-19_bit_2048_days_256/example.lan.key",
+            "bit": "2048",
+            "name": "example.lan.key"
+        },
+        "configuration": {
+            "CN": "example.lan",
+            "subjectAltName": "example.lan",
+            "authorityKeyIdentifier": "keyid,issuer",
+            "basicConstraints": "CA:FALSE",
+            "keyUsage": "digitalSignature,nonRepudiation,keyEncipherment,dataEncipherment",
+            "C": "US",
+            "ST": "VA",
+            "L": "Truro",
+            "O": "Digital_Signature_Inc",
+            "OU": "Mergebot",
+            "emailAddress": "noreply@mergebot.com"
+        },
+        "request": {
+            "path": "/Users/jozbox/python/openssl_cli_api/results/example.lan/2022-05-27_16-43-19_bit_2048_days_256/example.lan.csr",
+            "name": "example.lan.csr"
+        },
+        "certificate": {
+            "algorithm": "sha256",
+            "days": "256",
+            "path": "/Users/jozbox/python/openssl_cli_api/results/example.lan/2022-05-27_16-43-19_bit_2048_days_256/example.lan.crt",
+            "pass": "122b12",
+            "name": "example.lan.crt"
+        },
+        "p12": {
+            "password": "122b12",
+            "path": "/Users/jozbox/python/openssl_cli_api/results/example.lan/2022-05-27_16-43-19_bit_2048_days_256/example.lan.p12",
+            "name": "example.lan.p12"
+        }
+    }
+}

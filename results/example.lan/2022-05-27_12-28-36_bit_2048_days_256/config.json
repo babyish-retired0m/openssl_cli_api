@@ -1,0 +1,83 @@
+{
+    "ca": {
+        "private_key": {
+            "password": "52b5125gHZ.OaEXQgXbuTyGX70118.v4MNxq2nz6osUIXgKCfw.gWlmfwZCaa",
+            "path": "/Users/jozbox/python/openssl_cli_api/results/example.lan/2022-05-27_12-28-36_bit_2048_days_256/example.lan_CA.key",
+            "bit": "2048",
+            "name": "example.lan_CA.key"
+        },
+        "certificate": {
+            "algorithm": "sha256",
+            "days": "256",
+            "path": "/Users/jozbox/python/openssl_cli_api/results/example.lan/2022-05-27_12-28-36_bit_2048_days_256/example.lan_CA.pem",
+            "name": "example.lan_CA.pem"
+        },
+        "configuration": {
+            "CN": "example.lan",
+            "subjectAltName": "DNS.1=example.lan",
+            "authorityKeyIdentifier": "keyid,issuer",
+            "basicConstraints": "CA:FALSE",
+            "keyUsage": "digitalSignature,nonRepudiation,keyEncipherment,dataEncipherment",
+            "C": "US",
+            "ST": "VA",
+            "L": "Truro",
+            "O": "Delicious_Brains_Inc",
+            "OU": "Mergebot",
+            "emailAddress": "noreply@mergebot.com"
+        }
+    },
+    "key": {
+        "private_key": {
+            "password": "112b110811RfkyVG9Uvy7ZGc08gGCQI.nKPfXTGUZs0su88CyifXi6joUhSXUdy",
+            "path": "/Users/jozbox/python/openssl_cli_api/results/example.lan/2022-05-27_12-28-36_bit_2048_days_256/example.lan.key",
+            "bit": "2048",
+            "name": "example.lan.key"
+        },
+        "certificate": {
+            "algorithm": "sha256",
+            "days": "256",
+            "path": "/Users/jozbox/python/openssl_cli_api/results/example.lan/2022-05-27_12-28-36_bit_2048_days_256/example.lan.crt",
+            "pass": "62b614",
+            "name": "example.lan.crt"
+        },
+        "configuration": {
+            "CN": "example.lan",
+            "subjectAltName": "example.lan",
+            "authorityKeyIdentifier": "keyid,issuer",
+            "basicConstraints": "CA:FALSE",
+            "keyUsage": "digitalSignature,nonRepudiation,keyEncipherment,dataEncipherment",
+            "C": "US",
+            "ST": "VA",
+            "L": "Truro",
+            "O": "Delicious_Brains_Inc",
+            "OU": "Mergebot",
+            "emailAddress": "noreply@mergebot.com"
+        },
+        "request": {
+            "path": "/Users/jozbox/python/openssl_cli_api/results/example.lan/2022-05-27_12-28-36_bit_2048_days_256/example.lan.csr",
+            "name": "example.lan.csr"
+        },
+        "p12": {
+            "password": "62b614",
+            "path": "/Users/jozbox/python/openssl_cli_api/results/example.lan/2022-05-27_12-28-36_bit_2048_days_256/example.lan.p12",
+            "name": "example.lan.p12"
+        },
+        "pub": {
+            "path": "/Users/jozbox/python/openssl_cli_api/results/example.lan/2022-05-27_12-28-36_bit_2048_days_256/example.lan.pub",
+            "outform": "PEM",
+            "name": "example.lan.pub"
+        }
+    },
+    "configuration": {
+        "directory_parent": "/Users/jozbox/python/openssl_cli_api/results/",
+        "directory": "2022-05-27_12-28-36_bit_2048_days_256",
+        "path": "/Users/jozbox/python/openssl_cli_api/results/example.lan/2022-05-27_12-28-36_bit_2048_days_256/",
+        "domain": "example.lan",
+        "bit": 2048,
+        "days": 256,
+        "algorithm": "sha256",
+        "Unix_Epoch_Time": 1653654516.6132941,
+        "date": "2022-05-27",
+        "time": "12:28:36"
+    }
+}

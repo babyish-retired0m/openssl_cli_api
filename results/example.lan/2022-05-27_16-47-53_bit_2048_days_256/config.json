@@ -1,0 +1,44 @@
+{
+    "configuration": {
+        "directory_parent": "/Users/jozbox/python/openssl_cli_api/results/",
+        "directory": "2022-05-27_16-47-53_bit_2048_days_256",
+        "path": "/Users/jozbox/python/openssl_cli_api/results/example.lan/2022-05-27_16-47-53_bit_2048_days_256/",
+        "domain": "example.lan",
+        "bit": 2048,
+        "days": 256,
+        "algorithm": "sha256",
+        "Unix_Epoch_Time": 1653670073.890966,
+        "date": "2022-05-27",
+        "time": "16:47:53"
+    },
+    "key": {
+        "private_key": {
+            "password": "132b131313Azz8MjvyfgGTYgy7KARHFO7wjHnvQvSi6foZgJar.hXh18GgTfp4C",
+            "path": "/Users/jozbox/python/openssl_cli_api/results/example.lan/2022-05-27_16-47-53_bit_2048_days_256/example.lan.key",
+            "bit": "2048",
+            "name": "example.lan.key"
+        },
+        "configuration": {
+            "CN": "example.lan",
+            "subjectAltName": "example.lan",
+            "authorityKeyIdentifier": "keyid,issuer",
+            "basicConstraints": "CA:FALSE",
+            "keyUsage": "digitalSignature,nonRepudiation,keyEncipherment,dataEncipherment",
+            "C": "US",
+            "ST": "VA",
+            "L": "Truro",
+            "O": "Digital_Signature_Inc",
+            "OU": "Mergebot",
+            "emailAddress": "noreply@mergebot.com"
+        },
+        "request": {
+            "path": "/Users/jozbox/python/openssl_cli_api/results/example.lan/2022-05-27_16-47-53_bit_2048_days_256/example.lan.csr",
+            "name": "example.lan.csr"
+        },
+        "pub": {
+            "path": "/Users/jozbox/python/openssl_cli_api/results/example.lan/2022-05-27_16-47-53_bit_2048_days_256/example.lan.pub",
+            "outform": "PEM",
+            "name": "example.lan.pub"
+        }
+    }
+}
