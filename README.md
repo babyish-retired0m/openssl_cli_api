@@ -1,4 +1,4 @@
-# openssl cli api
+# Openssl CLI api
 Collect of useful commands for OpenSSL creating certificates, should be invoked on the command line.
 
 # Requirements
@@ -18,7 +18,7 @@ The recommended way to use OpenSSL CLI api is to use `python3`:
 
 **optional arguments:**
 
-  - -h, --help            show this help message and exit
+  - -h | --help            show this help message and exit
   
   - -a | --all [1024,2048,4096,8192,16392,32784,65568]
                         Create all Certificates, bit long modulus - choices=[1024, 2048, 4096, 8192, 16392, 32784, 65568],
