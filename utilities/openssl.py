@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """
 Copyright 2022. All rights reserved.
+
+brew install openssl@1.1
 """
-__version__ = "1.4"
+__version__ = "1.6"
 #Creating CA Certificates
 import os
 import utilities.file as file
@@ -10,22 +12,30 @@ import time
 import utilities.password as password
 
 class Create_Certificate:
-	def __init__(self, domain = "example.lan", bit=4096, days=256, algorithm="sha256", parent_dir=os.path.expanduser('~')+"/openssl/results/", key_signing = True):
+	def __init__(self, domain = "example.lan", bit=4096, days=256, algorithm="sha256", parent_dir = os.path.expanduser('~') + "/openssl/results/", key_signing = True):
 		"""
 		Print all the usefull info about Certificate.
 		"""
+		
+		self.C="US"
+		self.ST="Utah"
+		self.L="Lehi"
+		self.O="Digital Signature, Inc."
+		self.OU="IT"
+		self.EmailAddress="noreply@mergebot.com"
+		
 		self.domain=domain
 		self.passphrase_ca, length, time_to_generate = password.create(1)
 		self.passphrase_key, length, time_to_generate = password.create(1)
 		passphrase_key_crt, length, time_to_generate = password.create(1)
 		self.passphrase_key_crt=passphrase_key_crt[:6]
 		#private key
-		self.key_ca=domain+"_CA.key"
+		self.key_ca=domain+"_CA.key.pem"
 		#root certificate
-		self.key_ca_certificate=domain+"_CA.pem"
+		self.key_ca_certificate=domain+"_CA.crt"
 		self.certificate_ca_signed=domain+"_CA.crt"
 		#private key
-		self.key=domain+".key"
+		self.key=domain+".key.pem"
 		self.key_p12=domain+".p12"
 		#create a CSR
 		self.key_csr=domain+".csr"
@@ -49,7 +59,7 @@ class Create_Certificate:
 			path=parent_dir+self.domain+"/"
 			file.dirs_make(path)
 		path=parent_dir+self.domain+"/"
-		dir = time.strftime("%Y-%m-%d_%H-%M-%S", time.gmtime())+"_bit_"+self.bit+"_days_"+self.days
+		dir = time.strftime("%Y-%m-%d_%H-%M-%S", time.localtime())+"_bit_"+self.bit+"_days_"+self.days
 		self.path=path+dir+"/"
 		file.dirs_make(self.path)
 		self.parameters = {
@@ -62,8 +72,8 @@ class Create_Certificate:
 					"days":days,
 					"algorithm":algorithm,
 					"Unix_Epoch_Time":time.time(),
-					"date":time.strftime("%Y-%m-%d", time.gmtime()),
-					"time":time.strftime("%H:%M:%S", time.gmtime())
+					"date":time.strftime("%Y-%m-%d", time.localtime()),
+					"time":time.strftime("%H:%M:%S", time.localtime())
 							}
 						}
 		file.write_text_as_json(self.path+self.config,self.parameters)
@@ -73,23 +83,24 @@ class Create_Certificate:
 		self.Key_Private()
 		self.Key_p12()
 		self.Key_pub()
-		return self.path+self.config+".json"
+		return self.path + self.config + ".json"
 		
 	def write_text_json(self, path, text):
 		import json
-		json.dump(text, fp=open(path+".json",'w'),indent=4)
+		json.dump(text, fp = open(path+".json",'w'),indent = 4)
 	def Key_CA(self):
 		self.parameters["ca"]={
 				"private_key":{"password":self.passphrase_ca, "path":self.path+self.key_ca, "bit":self.bit, "name":self.key_ca},
 				"certificate":{"algorithm":self.algorithm, "days":self.days, "path":self.path + self.key_ca_certificate, "name":self.key_ca_certificate},
 				"configuration":{
-						"CN":self.domain, "subjectAltName":"DNS.1=" + self.domain, "authorityKeyIdentifier":"keyid,issuer", "basicConstraints":"CA:FALSE", "keyUsage":"digitalSignature,nonRepudiation,keyEncipherment,dataEncipherment", "C":"US", "ST":"VA", "L":"Truro", "O":"Digital_Signature_Inc", "OU":"Mergebot", "emailAddress":"noreply@mergebot.com"
+						"CN":self.domain, "subjectAltName":"DNS.1=" + self.domain, "authorityKeyIdentifier":"keyid,issuer", "basicConstraints":"CA:FALSE", "keyUsage":"digitalSignature,nonRepudiation,keyEncipherment,dataEncipherment", "C":self.C, "ST":self.ST, "L":self.L, "O":self.O, "OU":self.OU, "emailAddress":self.EmailAddress
 								}
 							}
 		#Creating CA Certificates
+		config = self.parameters['ca']['configuration']
 		os.system(f'openssl genrsa -des3 -passout pass:"{self.passphrase_ca}" -out {self.path + self.key_ca} {self.bit}')
 		#Creating CA root certificate self.parameters["ca"]["configuration"]["CN"]
-		os.system(f"openssl req -x509 -new -nodes -key {self.path + self.key_ca} -passin pass:'{self.passphrase_ca}' -{self.algorithm} -days {self.days} -out {self.path + self.key_ca_certificate} -subj '/CN={self.parameters['ca']['configuration']['CN']}/subjectAltName={self.parameters['ca']['configuration']['subjectAltName']}/authorityKeyIdentifier={self.parameters['ca']['configuration']['authorityKeyIdentifier']}/basicConstraints={self.parameters['ca']['configuration']['basicConstraints']}/keyUsage={self.parameters['ca']['configuration']['keyUsage']}/'")
+		os.system(f"openssl req -x509 -new -nodes -key {self.path + self.key_ca} -passin pass:'{self.passphrase_ca}' -{self.algorithm} -days {self.days} -out {self.path + self.key_ca_certificate} -subj '/CN={config['CN']}/subjectAltName={config['subjectAltName']}/authorityKeyIdentifier={config['authorityKeyIdentifier']}/basicConstraints={config['basicConstraints']}/keyUsage={config['keyUsage']}/C={config['C']}/ST={config['ST']}/L={config['L']}/O={config['O']}/OU={config['OU']}/'")
 		
 		file.write_text_as_json(self.path+self.config,self.parameters)
 		return self.path+self.config+".json"
@@ -97,20 +108,20 @@ class Create_Certificate:
 		self.parameters["key"] = {
 				"private_key":{"password":self.passphrase_key, "path":self.path+self.key, "bit":self.bit, "name":self.key},
 				"configuration":{
-						"CN":self.domain, "subjectAltName":self.domain, "authorityKeyIdentifier":"keyid,issuer", "basicConstraints":"CA:FALSE", "keyUsage":"digitalSignature,nonRepudiation,keyEncipherment,dataEncipherment", "C":"US", "ST":"VA", "L":"Truro", "O":"Digital_Signature_Inc", "OU":"Mergebot", "emailAddress":"noreply@mergebot.com"
+						"CN":self.domain, "subjectAltName":self.domain, "authorityKeyIdentifier":"keyid,issuer", "basicConstraints":"CA:FALSE", "keyUsage":"digitalSignature,nonRepudiation,keyEncipherment,dataEncipherment", "C":self.C, "ST":self.ST, "L":self.L, "O":self.O, "OU":self.OU, "emailAddress":self.EmailAddress
 								},
 				"request":{"path":self.path + self.key_csr, "name":self.key_csr}
 								}
 		#private key the private key
+		config = self.parameters['key']['configuration']
 		os.system(f"openssl genrsa -des3 -passout pass:'{self.passphrase_key}' -out '{self.path+self.key}' {self.bit}")
 		os.system(f"chmod 400 {self.path + self.key}")
 		#create a CSR the certificate signing request
-		os.system(f"openssl req -new -key {self.path + self.key} -passin pass:{self.passphrase_key} -out {self.path + self.key_csr} -subj '/CN={self.parameters['key']['configuration']['CN']}/subjectAltName={self.parameters['key']['configuration']['subjectAltName']}/authorityKeyIdentifier={self.parameters['key']['configuration']['authorityKeyIdentifier']}/basicConstraints={self.parameters['key']['configuration']['basicConstraints']}/keyUsage={self.parameters['key']['configuration']['keyUsage']}/'")
+		os.system(f"openssl req -new -key {self.path + self.key} -passin pass:{self.passphrase_key} -out {self.path + self.key_csr} -subj '/CN={config['CN']}/subjectAltName={config['subjectAltName']}/authorityKeyIdentifier={config['authorityKeyIdentifier']}/basicConstraints={config['basicConstraints']}/keyUsage={config['keyUsage']}/C={config['C']}/ST={config['ST']}/L={config['L']}/O={config['O']}/OU={config['OU']}/'")
 		if self.key_signing:
 			self.parameters["key"]["certificate"] = {"algorithm":self.algorithm, "days":self.days, "path":self.path+self.key_crt, "pass":self.passphrase_key_crt, "name":self.key_crt}
 			#Create Certificate the signed certificate
 			os.system(f"openssl x509 -req -passin pass:'{self.passphrase_ca}' -CA {self.path+self.key_ca_certificate} -CAkey {self.path+self.key_ca} -CAcreateserial -in {self.path+self.key_csr} -out {self.path+self.key_crt} -days {self.days} -{self.algorithm}")
-		
 		
 		file.write_text_as_json(self.path + self.config, self.parameters)
 		return self.path + self.config + ".json"

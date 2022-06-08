@@ -68,14 +68,14 @@ class Cli_api:
 		if args.key_pub:
 			print("Creating key pub certificate")
 			print(args)
-			"""self.Get_openssl = openssl.Create_Certificate(domain = self.domain, bit = self.bit, days = self.days, algorithm = self.algorithm, parent_dir = self.path, key_signing = False)
+			self.Get_openssl = openssl.Create_Certificate(domain = self.domain, bit = self.bit, days = self.days, algorithm = self.algorithm, parent_dir = self.path, key_signing = False)
 			self.Get_openssl.Key_Private()
 			path = self.Get_openssl.Key_pub()
 			config = json.load(open(path))
 			print("\nConfig path:",path,"\n")
 			print("KEY password:",config["key"]["private_key"]["password"])
 			print("KEY path:",config["key"]["private_key"]["path"],"\n")
-			print("Pub path:",config["key"]["pub"]["path"],"\n")"""
+			print("Pub path:",config["key"]["pub"]["path"],"\n")
 	def get_args(self, args = {}):
 		self.parser = argparse.ArgumentParser(add_help = True, description = "Collect of useful command for OpenSSL create certificate:")
 		group = self.parser.add_mutually_exclusive_group(required = True)
